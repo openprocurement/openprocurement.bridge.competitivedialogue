@@ -19,16 +19,12 @@ docs_requires = requires + [
 entry_points = {
     'console_scripts': [
         'competitive_dialogue_data_bridge = openprocurement.bridge.competitivedialogue.databridge:main'
-    ],
-    'openprocurement.api.plugins': [
-        'competitivedialogue = openprocurement.tender.competitivedialogue:includeme'
     ]
 }
 
 databridge_requires = requires + [
     'PyYAML',
     'gevent',
-    'LazyDB',
     'ExtendedJournalHandler',
     'openprocurement_client>=1.0b2',
     'openprocurement.tender.competitivedialogue'
@@ -36,13 +32,10 @@ databridge_requires = requires + [
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(here, 'README.md')) as f:
-    README = f.read()
-
 setup(name='openprocurement.bridge.competitivedialogue',
       version=version,
       description="",
-      long_description=README,
+      long_description=open("README.rst").read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
