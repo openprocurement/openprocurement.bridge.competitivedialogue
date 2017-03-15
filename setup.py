@@ -4,7 +4,12 @@ import os
 version = '1.0.12'
 
 requires = [
-    'setuptools'
+    'setuptools',
+    'PyYAML',
+    'gevent',
+    'ExtendedJournalHandler',
+    'openprocurement_client>=1.0b2',
+    'openprocurement.tender.competitivedialogue'
 ]
 
 test_requires = requires + [
@@ -21,14 +26,6 @@ entry_points = {
         'competitive_dialogue_data_bridge = openprocurement.bridge.competitivedialogue.databridge:main'
     ]
 }
-
-databridge_requires = requires + [
-    'PyYAML',
-    'gevent',
-    'ExtendedJournalHandler',
-    'openprocurement_client>=1.0b2',
-    'openprocurement.tender.competitivedialogue'
-]
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -52,7 +49,6 @@ setup(name='openprocurement.bridge.competitivedialogue',
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
-      extras_require={'test': test_requires, 'docs': docs_requires,
-                      'databridge': databridge_requires},
+      extras_require={'test': test_requires, 'docs': docs_requires},
       test_suite="openprocurement.bridge.competitivedialogue.tests.main.suite",
       entry_points=entry_points)
