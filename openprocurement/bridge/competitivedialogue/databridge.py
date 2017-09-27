@@ -26,9 +26,7 @@ from gevent.queue import Queue
 from openprocurement_client.client import TendersClientSync as BaseTendersClientSync
 from yaml import load
 
-from openprocurement.tender.competitivedialogue.models_constants import (
-    CD_UA_TYPE, CD_EU_TYPE, STAGE_2_EU_TYPE, STAGE_2_UA_TYPE, STAGE2_STATUS
-)
+
 from openprocurement.bridge.competitivedialogue.journal_msg_ids import (
     DATABRIDGE_RESTART, DATABRIDGE_GET_CREDENTIALS, DATABRIDGE_GOT_CREDENTIALS,
     DATABRIDGE_FOUND_NOLOT,
@@ -42,6 +40,12 @@ from openprocurement.bridge.competitivedialogue.journal_msg_ids import (
     DATABRIDGE_UNSUCCESSFUL_PATCH_DIALOG_STATUS, DATABRIDGE_SUCCESSFUL_PATCH_DIALOG_STATUS, DATABRIDGE_ONLY_PATCH,
     DATABRIDGE_TENDER_STAGE2_NOT_EXIST, DATABRIDGE_CREATE_NEW_STAGE2, DATABRIDGE_WORKER_DIED)
 
+
+CD_UA_TYPE = "competitiveDialogueUA"
+CD_EU_TYPE = "competitiveDialogueEU"
+STAGE_2_EU_TYPE = "competitiveDialogueEU.stage2"
+STAGE_2_UA_TYPE = "competitiveDialogueUA.stage2"
+STAGE2_STATUS = 'draft.stage2'
 
 dialog_work = set()  # local storage for current competitive dialogue in main queue
 

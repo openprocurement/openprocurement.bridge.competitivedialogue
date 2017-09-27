@@ -9,7 +9,6 @@ requires = [
     'gevent',
     'ExtendedJournalHandler',
     'openprocurement_client>=1.0b2',
-    'openprocurement.tender.competitivedialogue'
 ]
 
 test_requires = requires + [
