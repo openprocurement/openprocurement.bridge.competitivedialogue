@@ -116,6 +116,12 @@ def check_status_response(func):
         return response
     return func_wrapper
 
+def wait_initialization(func):
+    def func_wrapper(obj, *args, **kwargs):
+        gevent.wait(objects=[obj.initialization_event])
+        return func(obj, *args, **kwargs)
+    return func_wrapper
+
 
 class TendersClientSync(BaseTendersClientSync):
 
@@ -644,8 +650,8 @@ class CompetitiveDialogueDataBridge(object):
                 self.dialog_stage2_id_queue.put(dialog)
             gevent.sleep(0)
 
+    @wait_initialization()
     def get_competitive_dialogue_forward(self):
-        gevent.wait([self.initialization_event])
         logger.info('Start forward data sync worker...')
         params = {'opt_fields': 'status,procurementMethodType', 'mode': '_all_'}
         try:
