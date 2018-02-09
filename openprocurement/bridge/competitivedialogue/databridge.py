@@ -213,7 +213,6 @@ class CompetitiveDialogueDataBridge(object):
             raise ValueError
         else:
             assert 'descending' not in params
-            gevent.wait([self.initialization_event])
             self.initialization_event.clear()
             params['offset'] = self.initial_sync_point['forward_offset']
             logger.info("Starting forward sync from offset {}".format(params['offset']))
@@ -646,6 +645,7 @@ class CompetitiveDialogueDataBridge(object):
             gevent.sleep(0)
 
     def get_competitive_dialogue_forward(self):
+        gevent.wait([self.initialization_event])
         logger.info('Start forward data sync worker...')
         params = {'opt_fields': 'status,procurementMethodType', 'mode': '_all_'}
         try:
